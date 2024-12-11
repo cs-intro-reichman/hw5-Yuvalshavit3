@@ -129,16 +129,18 @@ public class Scrabble {
 			//validates the word
 			if(!isWordInDictionary(input)){
 				System.out.println("word not found in dictionary");
-				break;
+				continue;
 			}
 
 			if(!MyString.subsetOf(input, hand)){
 				System.out.println("letters not found in the hand");
-				break;
+				continue;
 			}
 
 			hand = MyString.remove(hand, input);
-			score += wordScore(input);
+			int wordPoints = wordScore(input);   // Get the points for the word
+			score += wordPoints;                 // Add the points to the total score
+			System.out.println("\"" + input + "\" earned " + wordPoints + " points. Total: " + score + " points.");
 
 		}
 		if (hand.length() == 0) {
