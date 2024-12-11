@@ -89,12 +89,16 @@ public class Scrabble {
 	public static String createHand() {
 		String hand = MyString.randomStringOfLetters(HAND_SIZE - 2);
 		
-		int aIndex = (int)(Math.random() * hand.length() - 1);
-		hand = hand.substring(0, aIndex) + "a" + hand.substring(aIndex, hand.length());
+		int aIndex = (int)(Math.random() * (hand.length() - 1));
+		hand = hand.substring(0, aIndex) + "a" + hand.substring(aIndex);
 		
-		int eIndex = (int)(Math.random() * hand.length() - 1);
-		hand = hand.substring(0, eIndex) + "e" + hand.substring(eIndex, hand.length());
-		System.out.println(hand);
+		int eIndex = (int)(Math.random() *(hand.length() - 1));
+		hand = hand.substring(0, eIndex) + "e" + hand.substring(eIndex);
+		
+		if (hand.length() > HAND_SIZE) {
+			hand = hand.substring(0, HAND_SIZE);
+		}
+
 		return hand;
 	}
 	
