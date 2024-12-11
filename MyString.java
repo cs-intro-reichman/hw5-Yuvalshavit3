@@ -47,16 +47,25 @@ public class MyString {
      * @param str2 - a string
      * @return true is str1 is a subset of str2, false otherwise
      */
-    public static boolean subsetOf(String str1, String str2) {
-        char charat = 0;
-        for(int i = 0; i < str1.length(); i++){
-            charat = str1.charAt(i);
-            if(countChar(str1, charat) > countChar(str2, charat)){
+    public static boolean subsetOf(String word, String hand) {
+        int[] handCounts = new int[26]; // To store frequency of each letter in hand
+        int[] wordCounts = new int[26]; // To store frequency of each letter in word
+    
+        // Count the frequency of each character in the hand
+        for (char c : hand.toCharArray()) {
+            handCounts[c - 'a']++;
+        }
+    
+        // Count the frequency of each character in the word
+        for (char c : word.toCharArray()) {
+            wordCounts[c - 'a']++;
+            // If the word requires more of a letter than is available in the hand
+            if (wordCounts[c - 'a'] > handCounts[c - 'a']) {
                 return false;
             }
         }
-            
-        return true;
+    
+        return true; // All characters in the word are found in the hand
     }
 
     /** Returns a string which is the same as the given string, with a space

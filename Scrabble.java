@@ -47,18 +47,22 @@ public class Scrabble {
 			DICTIONARY[NUM_OF_WORDS++] = in.readString().toLowerCase();
 		}
         System.out.println(NUM_OF_WORDS + " words loaded.");
+		
+		
 	}
 
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
-		for(int i = 0; i < NUM_OF_WORDS; i++){
-			if(DICTIONARY[i].toLowerCase().equals(word.toLowerCase())){
-				return true;
-			}
-		}
-		
-		return false;
-	}
+		word = word.toLowerCase();
+    	for (int i = 0; i < NUM_OF_WORDS; i++) {
+        // Debugging: print the dictionary word
+        	System.out.println("Checking: " + DICTIONARY[i] + " against " + word);
+        	if (DICTIONARY[i].equals(word)) {
+           		return true;
+        }
+    }
+    return false;
+}
 	
 	// Returns the Scrabble score of the given word.
 	// If the length of the word equals the length of the hand, adds 50 points to the score.
@@ -186,10 +190,12 @@ public class Scrabble {
 	public static void main(String[] args) {
 		//// Uncomment the test you want to run
 		////testBuildingTheDictionary();  
+		if(isWordInDictionary("train")){System.out.println("yes");} else {System.out.println("n");};
+		init();
 		////testScrabbleScore();    
 		////testCreateHands();  
 		////testPlayHands();
-		playGame();
+		/// playGame();
 	}
 
 	public static void testBuildingTheDictionary() {
