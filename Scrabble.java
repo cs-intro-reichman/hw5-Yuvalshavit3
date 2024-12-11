@@ -162,9 +162,14 @@ public class Scrabble {
 			// Gets the user's input, which is all the characters entered by 
 			// the user until the user enter the ENTER character.
 			String input = in.readString();
+			if (input == null || input.isEmpty()) {
+				// Avoid exiting prematurely during tests with no input
+				return;
+			}
+
 			if(input.equals("n")){
-				String n = createHand();
-				playHand(n);
+				String hand = createHand();
+				playHand(hand);
 			} else if(input.equals("e")){
 				System.out.println("Thank you for playing Scrabble!");
             	break;
@@ -172,7 +177,7 @@ public class Scrabble {
 				// Handle invalid input
 				System.out.println("Invalid input. Please enter 'n' to play a new hand or 'e' to exit.");
 			}
-			break;
+			
 		}
 	}
 
