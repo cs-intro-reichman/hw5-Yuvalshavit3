@@ -52,7 +52,7 @@ public class Scrabble {
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
 		for(int i = 0; i < NUM_OF_WORDS; i++){
-			if(DICTIONARY[i] == word){
+			if(DICTIONARY[i].toLowerCase().equals(word.toLowerCase())){
 				return true;
 			}
 		}
@@ -111,6 +111,7 @@ public class Scrabble {
 		int score = 0;
 		// Declares the variable in to refer to an object of type In, and initializes it to represent
 		// the stream of characters coming from the keyboard. Used for reading the user's inputs.   
+
 		In in = new In();
 		while (hand.length() > 0) {
 			System.out.println("Current Hand: " + MyString.spacedString(hand));
