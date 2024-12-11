@@ -72,7 +72,7 @@ public class Scrabble {
 		int letterScore;
 		for(int i = 0; i < word.length(); i++){
 			letterScore = SCRABBLE_LETTER_VALUES[word.charAt(i) - 97];
-			totalScore += letterScore;
+			totalScore += letterScore * word.length();
 		}
 		totalScore = totalScore * word.length();
 		
