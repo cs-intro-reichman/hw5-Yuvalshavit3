@@ -53,7 +53,6 @@ public class Scrabble {
 
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
-		word = word.toLowerCase();
     	for (int i = 0; i < DICTIONARY.length; i++) {
         	if (word.equals(DICTIONARY[i])) {
            		return true;
@@ -72,7 +71,6 @@ public class Scrabble {
 			letterScore = SCRABBLE_LETTER_VALUES[word.charAt(i) - 97];
 			totalScore += letterScore * word.length();
 		}
-		totalScore = totalScore * word.length();
 		
 		if(word.length() == HAND_SIZE){
 			totalScore += 50;
@@ -124,7 +122,6 @@ public class Scrabble {
 			String input = in.readString();
 
 			if(input.equals(".")){
-				System.out.println("End of hand. Total score: " + score + " points");
 				break; // Exit the method
 			}
 
