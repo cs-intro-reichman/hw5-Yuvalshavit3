@@ -55,9 +55,7 @@ public class Scrabble {
 	public static boolean isWordInDictionary(String word) {
 		word = word.toLowerCase();
     	for (int i = 0; i < DICTIONARY.length; i++) {
-        // Debugging: print the dictionary word
-        	System.out.println("Checking: " + DICTIONARY[i] + " against " + word);
-        	if (DICTIONARY[i].equals(word)) {
+        	if (word.equals(DICTIONARY[i])) {
            		return true;
         }
     }
@@ -187,12 +185,10 @@ public class Scrabble {
 	public static void main(String[] args) {
 		//// Uncomment the test you want to run
 		////testBuildingTheDictionary();  
-		if(isWordInDictionary("train")){System.out.println("yes");} else {System.out.println("n");};
-		init();
 		////testScrabbleScore();    
 		////testCreateHands();  
 		////testPlayHands();
-		/// playGame();
+		playGame();
 	}
 
 	public static void testBuildingTheDictionary() {
