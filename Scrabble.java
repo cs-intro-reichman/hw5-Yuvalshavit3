@@ -54,7 +54,7 @@ public class Scrabble {
 	// Checks if the given word is in the dictionary.
 	public static boolean isWordInDictionary(String word) {
 		word = word.toLowerCase();
-    	for (int i = 0; i < NUM_OF_WORDS; i++) {
+    	for (int i = 0; i < DICTIONARY.length; i++) {
         // Debugging: print the dictionary word
         	System.out.println("Checking: " + DICTIONARY[i] + " against " + word);
         	if (DICTIONARY[i].equals(word)) {
@@ -123,35 +123,33 @@ public class Scrabble {
 			// Reads the next "token" from the keyboard. A token is defined as a string of 
 			// non-whitespace characters. Whitespace is either space characters, or  
 			// end-of-line characters.
-			String input = in.readString().toLowerCase();
+			String input = in.readString();
 
 			if(input.equals(".")){
 				System.out.println("End of hand. Total score: " + score + " points");
-				return; // Exit the method
+				break; // Exit the method
 			}
 
-			//validates the word
-			if(!isWordInDictionary(input)){
-				System.out.println("word not found in dictionary");
-				continue;
+			if(MyString.subsetOf(input, hand)){
+				if(isWordInDictionary(input)){
+					hand = MyString.remove(hand, input);
+					int wordPoints = wordScore(input);   // Get the points for the word
+					score += wordPoints;                 // Add the points to the total score
+					System.out.println(input + " earned " + wordPoints + " points. Score: " + score + " points\n");
+
+				} else {
+					System.out.println("No such word in the dictionary. Try again.");
+				}
+			} else {
+				System.out.println("Invalid word. Try again.");
 			}
-
-			if(!MyString.subsetOf(input, hand)){
-				System.out.println("letters not found in the hand");
-				continue;
-			}
-
-			hand = MyString.remove(hand, input);
-			int wordPoints = wordScore(input);   // Get the points for the word
-			score += wordPoints;                 // Add the points to the total score
-			System.out.println("\"" + input + "\" earned " + wordPoints + " points. Total: " + score + " points.");
-
 		}
-		if (hand.length() == 0) {
-	        System.out.println("Ran out of letters. Total score: " + score + " points");
-		} else {
-			System.out.println("End of hand. Total score: " + score + " points");
-		}
+				
+			if (hand.length() == 0) {
+				System.out.println("Ran out of letters. Total score: " + score + " points");
+			} else {
+				System.out.println("End of hand. Total score: " + score + " points");
+			}
 	}
 
 	// Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'
@@ -170,14 +168,13 @@ public class Scrabble {
 			String input = in.readString();
 			if (input == null || input.isEmpty()) {
 				// Avoid exiting prematurely during tests with no input
-				return;
+				break;
 			}
 
 			if(input.equals("n")){
 				String hand = createHand();
 				playHand(hand);
 			} else if(input.equals("e")){
-				System.out.println("Thank you for playing Scrabble!");
             	break;
 			} else {
 				// Handle invalid input
